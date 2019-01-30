@@ -32,8 +32,7 @@ public class DBManager {
 		try {
 			String driver = "org.hsqldb.jdbcDriver";
 			String protocol = "jdbc:hsqldb:";
-			Class.forName(driver).newInstance();
-			String tag = "";			
+			Class.forName(driver).newInstance();			
 			String user = "sa";
 			String password = "";
 			Properties props = new Properties();
