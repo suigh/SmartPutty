@@ -27,7 +27,7 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
   private MainFrame mainFrame;
   private Shell dialog;
   private Combo comboHost, comboUser, comboProtocol;
-  private Text textPassword, textkey;
+  private Text tag, textPassword, textkey;
   private Button buttonFile, buttonOk, buttonCancel;
 
   public NewSessionDialog(MainFrame mainFrame, OpenSessionDialog sessionDialog, String type) {
@@ -44,8 +44,14 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
     ArrayList<ConfigSession> sessions = (ArrayList<ConfigSession>) MainFrame.dbm.getAllCSessions();
 
     Label lable = new Label(dialog, SWT.NONE);
-    lable.setText("Host");
+    lable.setText("Tag");
     lable.setBounds(0, 0, x / 3, y / 6);
+    tag = new Text(dialog, SWT.BORDER);
+    tag.setBounds(x / 3, 0, 2 * x / 3, y / 6);
+    
+    lable = new Label(dialog, SWT.NONE);
+    lable.setText("Host");
+    lable.setBounds(0, y / 6, x / 3, y / 6);
     comboHost = new Combo(dialog, SWT.None);
     //hashset host
     HashSet<String> hs = new HashSet<String>();
@@ -55,19 +61,19 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
     for (String item : hs) {
       comboHost.add(item);
     }
-    comboHost.setBounds(x / 3, 0, 2 * x / 3, y / 6);
+    comboHost.setBounds(x / 3, y / 6, 2 * x / 3, y / 6);
     comboHost.addSelectionListener(this);
 
     lable = new Label(dialog, SWT.NONE);
     lable.setText("User");
-    lable.setBounds(0, y / 6, x / 3, y / 6);
+    lable.setBounds(0, 2 * y / 6, x / 3, y / 6);
     comboUser = new Combo(dialog, SWT.None);
-    comboUser.setBounds(x / 3, y / 6, 2 * x / 3, y / 6);
+    comboUser.setBounds(x / 3, 2 * y / 6, 2 * x / 3, y / 6);
     comboUser.addSelectionListener(this);
 
     lable = new Label(dialog, SWT.NONE);
     lable.setText("Protocol");
-    lable.setBounds(0, 2 * y / 6, x / 3, y / 6);
+    lable.setBounds(0, 3 * y / 6, x / 3, y / 6);
     comboProtocol = new Combo(dialog, SWT.READ_ONLY);
 //    comboProtocol.setItems(new String[] { "ssh" });
 	// Get all protocols and add:
@@ -75,25 +81,25 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
 		comboProtocol.add(protocol.getName());
 	}
 	comboProtocol.select(0);
-    comboProtocol.setBounds(x / 3, 2 * y / 6, 2 * x / 3, y / 6);
+    comboProtocol.setBounds(x / 3, 3 * y / 6, 2 * x / 3, y / 6);
     comboProtocol.setText(ConstantValue.DEFAULT_PROTOCOL);
     comboProtocol.addSelectionListener(this);
 
     lable = new Label(dialog, SWT.NONE);
     lable.setText("SSH Key");
-    lable.setBounds(0, 3 * y / 6, x / 3, y / 6);
+    lable.setBounds(0, 4 * y / 6, x / 3, y / 6);
     textkey = new Text(dialog, SWT.BORDER);
-    textkey.setBounds(x / 3, 3 * y / 6, 3 * x / 6, y / 6);
+    textkey.setBounds(x / 3, 4 * y / 6, 3 * x / 6, y / 6);
     buttonFile = new Button(dialog, SWT.PUSH);
-    buttonFile.setBounds(5 * x / 6, 3 * y / 6, x / 6, y / 6);
+    buttonFile.setBounds(5 * x / 6, 4 * y / 6, x / 6, y / 6);
     buttonFile.setText("browse");
     buttonFile.addMouseListener(this);
 
     lable = new Label(dialog, SWT.NONE);
     lable.setText("Password");
-    lable.setBounds(0, 4 * y / 6, x / 3, y / 6);
+    lable.setBounds(0, 5 * y / 6, x / 3, y / 6);
     textPassword = new Text(dialog, SWT.PASSWORD | SWT.BORDER);
-    textPassword.setBounds(x / 3, 4 * y / 6, 2 * x / 3, y / 6);
+    textPassword.setBounds(x / 3, 5 * y / 6, 2 * x / 3, y / 6);
 
     buttonOk = new Button(dialog, SWT.PUSH);
     buttonOk.setText("ok");
