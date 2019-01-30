@@ -12,6 +12,8 @@ import org.eclipse.swt.internal.win32.OS;
 import org.eclipse.swt.internal.win32.SHELLEXECUTEINFO;
 import org.eclipse.swt.internal.win32.TCHAR;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.graphics.Font; 
+import org.eclipse.swt.widgets.Display; 
 
 import Model.ConfigSession;
 import Model.ConstantValue;
@@ -113,7 +115,7 @@ public class InvokeProgram extends Thread {
 		if (session.getConfigSessionType() == ConstantValue.ConfigSessionTypeEnum.PURE_PUTTY_SESSION) {
 			tabDisplayName = session.getSession();
 		} else {
-			tabDisplayName = session.getTag();
+			tabDisplayName = session.getTag() + "   ";
 		}
 
 		String args = setPuttyParameters(session);
@@ -197,6 +199,9 @@ public class InvokeProgram extends Thread {
 		OS.SendMessage(hwnd, OS.WM_SYSCOMMAND, OS.SC_MAXIMIZE, 0);
 
 		if (hwnd != 0) {
+			Display display = Display.getDefault(); 
+			Font songFont = new Font(display, "Dialog", 22, SWT.LEFT); 
+			tabItem.setFont(songFont);
 			tabItem.setText(tabDisplayName);
 			tabItem.setData("hwnd", hwnd);
 			tabItem.setData("session", session);
