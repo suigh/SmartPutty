@@ -113,7 +113,7 @@ public class InvokeProgram extends Thread {
 		if (session.getConfigSessionType() == ConstantValue.ConfigSessionTypeEnum.PURE_PUTTY_SESSION) {
 			tabDisplayName = session.getSession();
 		} else {
-			tabDisplayName = session.getHost();
+			tabDisplayName = session.getTag();
 		}
 
 		String args = setPuttyParameters(session);
