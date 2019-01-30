@@ -857,10 +857,10 @@ public class MainFrame implements SelectionListener, CTabFolder2Listener, MouseL
 			String user = usernameItem.getText();
 			String password = passwordItem.getText();
 			String session = sessionCombo.getText();
-			 System.out.println("protocol: " + protocol + ", host: " + host + ", port: " + port + ", user: " + user + ", password: " + password + ", session: " + session); //DEBUG
+			System.out.println("protocol: " + protocol + ", host: " + host + ", port: " + port + ", user: " + user + ", password: " + password + ", session: " + session); //DEBUG
 			ConfigSession configSession = null;
 			if (session.trim().isEmpty()) {
-				configSession = new ConfigSession(host, port, user, protocol, "", password);
+				configSession = new ConfigSession("", host, port, user, protocol, "", password);
 			}else{
 				configSession = new ConfigSession(user, password, port, session);
 			}

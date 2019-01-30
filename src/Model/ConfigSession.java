@@ -8,6 +8,7 @@ import Model.ConstantValue.ConfigSessionTypeEnum;
  */
 public class ConfigSession {
 	private ConfigSessionTypeEnum ConfigSessionType = ConfigSessionTypeEnum.SMART_PUTTY_SESSION;
+	private String tag = "";
 	private String host = "";
 	private String port = ""; // Can be a number or a device name (COM1, COM2, ...).
 	private String user = "";
@@ -33,7 +34,8 @@ public class ConfigSession {
 	 * @param file
 	 * @param password
 	 */
-	public ConfigSession(String host, String port, String user, Protocol protocol, String file, String password){
+	public ConfigSession(String hostTag, String host, String port, String user, Protocol protocol, String file, String password){
+		this.tag = tag;
 		this.host = host;
 		this.port = port;
 		this.user = user;
@@ -46,6 +48,10 @@ public class ConfigSession {
 	
 	public ConfigSessionTypeEnum getConfigSessionType() {
 		return ConfigSessionType;
+	}
+
+	public String getTag(){
+		return tag;
 	}
 
 	public String getHost(){

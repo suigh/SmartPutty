@@ -33,6 +33,7 @@ public class DBManager {
 			String driver = "org.hsqldb.jdbcDriver";
 			String protocol = "jdbc:hsqldb:";
 			Class.forName(driver).newInstance();
+			String tag = "";			
 			String user = "sa";
 			String password = "";
 			Properties props = new Properties();
@@ -63,7 +64,7 @@ public class DBManager {
 			}
 			result.close();
 			if (!existCSessionTable){
-				String sql = "CREATE TABLE CSession(Host varchar(50), Port varchar(10), User varchar(50), Protocol varchar(10), Key varchar(100), Password varchar(50), PRIMARY KEY (Host,Port,User,Protocol))";
+				String sql = "CREATE TABLE CSession(Tag varchar(50), Host varchar(50), Port varchar(10), User varchar(50), Protocol varchar(10), Key varchar(100), Password varchar(50), PRIMARY KEY (Host,Port,User,Protocol))";
 				state.execute(sql);
 			}
 			if (!existIntranetTable){
@@ -89,6 +90,7 @@ public class DBManager {
 	}
 
 	public void insertCSession(ConfigSession csession){
+		String tag = csession.getTag();
 		String host = csession.getHost();
 		String port = csession.getPort();
 		String user = csession.getUser();
@@ -104,6 +106,7 @@ public class DBManager {
 		}
 
 		String sql = "INSERT INTO CSession VALUES('"
+			+ tag + "','"		
 			+ host + "','"
 			+ port + "','"
 			+ user + "','"
@@ -148,6 +151,7 @@ public class DBManager {
 			ResultSet rs = state.executeQuery(sql);
 			while (rs.next()){
 				ConfigSession confSession = new ConfigSession(
+					rs.getString("Tag"),					
 					rs.getString("Host"),
 					rs.getString("Port"),
 					rs.getString("User"),
@@ -175,6 +179,7 @@ public class DBManager {
 			ResultSet rs = state.executeQuery(sql);
 			while (rs.next()){
 				ConfigSession confSession = new ConfigSession(
+					rs.getString("Tag"),					
 					rs.getString("Host"),
 					rs.getString("Port"),
 					rs.getString("User"),
@@ -201,6 +206,7 @@ public class DBManager {
 			ResultSet rs = state.executeQuery(sql);
 			while (rs.next()){
 				ConfigSession confSession = new ConfigSession(
+					rs.getString("Tag"),					
 					rs.getString("Host"),
 					rs.getString("Port"),
 					rs.getString("User"),
@@ -229,6 +235,7 @@ public class DBManager {
 			ResultSet rs = state.executeQuery(sql);
 			while (rs.next()){
 				ConfigSession confSession = new ConfigSession(
+					rs.getString("Tag"),					
 					rs.getString("Host"),
 					rs.getString("Port"),
 					rs.getString("User"),
@@ -249,7 +256,7 @@ public class DBManager {
 		String host = session.getHost();
 		String user = session.getUser();
 		String protocol = session.getProtocol().name();
-//		String password = Base64Util.encodeBASE64(session.getPassword());
+		//String password = Base64Util.encodeBASE64(session.getPassword());
 		ConfigSession result = null;
 		String sql = String.format("SELECT * FROM CSession WHERE host='%s' AND user='%s' AND protocol='%s'", host, user, protocol);
 		
@@ -259,6 +266,7 @@ public class DBManager {
 			ResultSet rs = state.executeQuery(sql);
 			while (rs.next()){
 				ConfigSession confSession = new ConfigSession(
+					rs.getString("Tag"),					
 					rs.getString("Host"),
 					rs.getString("Port"),
 					rs.getString("User"),

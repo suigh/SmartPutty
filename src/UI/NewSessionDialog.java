@@ -27,7 +27,7 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
   private MainFrame mainFrame;
   private Shell dialog;
   private Combo comboHost, comboUser, comboProtocol;
-  private Text tag, textPassword, textkey;
+  private Text hostTag, textPassword, textkey;
   private Button buttonFile, buttonOk, buttonCancel;
 
   public NewSessionDialog(MainFrame mainFrame, OpenSessionDialog sessionDialog, String type) {
@@ -46,8 +46,8 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
     Label lable = new Label(dialog, SWT.NONE);
     lable.setText("Tag");
     lable.setBounds(0, 0, x / 3, y / 6);
-    tag = new Text(dialog, SWT.BORDER);
-    tag.setBounds(x / 3, 0, 2 * x / 3, y / 6);
+    hostTag = new Text(dialog, SWT.BORDER);
+    hostTag.setBounds(x / 3, 0, 2 * x / 3, y / 6);
     
     lable = new Label(dialog, SWT.NONE);
     lable.setText("Host");
@@ -188,13 +188,14 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
   public void mouseDown(org.eclipse.swt.events.MouseEvent e) {
     // TODO Auto-generated method stub
     if (e.getSource() == buttonOk) {
+      String tag = hostTag.getText();
       String host = comboHost.getText();
       String user = comboUser.getText();
       String password = textPassword.getText();
       // String protocol = comboProtocol.getText();
 	  Protocol protocol = Protocol.values()[comboProtocol.getSelectionIndex()];
       String file = textkey.getText().trim();
-      ConfigSession session = new ConfigSession(host, "22", user, protocol,file, password);
+      ConfigSession session = new ConfigSession(tag, host, "22", user, protocol,file, password);
 
       if (!host.trim().equals("") && !user.trim().equals("") && !protocol.equals("")) {
         dialog.dispose();
