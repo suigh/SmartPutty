@@ -34,7 +34,7 @@ public class ConfigSession {
 	 * @param file
 	 * @param password
 	 */
-	public ConfigSession(String hostTag, String host, String port, String user, Protocol protocol, String file, String password){
+	public ConfigSession(String tag, String host, String port, String user, Protocol protocol, String file, String password){
 		this.tag = tag;
 		this.host = host;
 		this.port = port;
@@ -52,6 +52,10 @@ public class ConfigSession {
 
 	public String getTag(){
 		return tag;
+	}
+
+	public void setTag(String tag){
+		this.tag = tag;
 	}
 
 	public String getHost(){
