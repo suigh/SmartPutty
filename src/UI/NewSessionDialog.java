@@ -193,7 +193,7 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
       String user = comboUser.getText();
       String password = textPassword.getText();
       // String protocol = comboProtocol.getText();
-	  Protocol protocol = Protocol.values()[comboProtocol.getSelectionIndex()];
+	    Protocol protocol = Protocol.values()[comboProtocol.getSelectionIndex()];
       String file = textkey.getText().trim();
       ConfigSession session = new ConfigSession(tag, host, "22", user, protocol,file, password);
 

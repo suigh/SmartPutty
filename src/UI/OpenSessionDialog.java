@@ -26,7 +26,7 @@ public class OpenSessionDialog  implements SelectionListener, MouseListener{
 	private DBManager dbm;
 	private Button addButton,editButton,deleteButton,connectButton,puttyWindow;
 	// Helper to deal with positions until a new layout can be made:
-	private static final int X_POS = 404;
+	private static final int X_POS = 504;
 	
 	public OpenSessionDialog(MainFrame mainFrame, Shell parent){
 		this.dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
@@ -43,15 +43,19 @@ public class OpenSessionDialog  implements SelectionListener, MouseListener{
 	private void init(){
 		dialog.setImage(MImage.openImage);
 		dialog.setText("Open Session Dialog");
-		dialog.setSize(350,300);
+		dialog.setSize(450,300);
 		
 		table = new Table(dialog, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
-		table.setBounds(0, 0, 396, 257);
+		table.setBounds(0, 0, 496, 257);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		table.addMouseListener(this);
 
 		TableColumn tableHostColumn = new TableColumn(table, SWT.NONE);
+		tableHostColumn.setWidth(100);
+		tableHostColumn.setText("Tag");
+
+		tableHostColumn = new TableColumn(table, SWT.NONE);
 		tableHostColumn.setWidth(166);
 		tableHostColumn.setText("Host");
 
@@ -138,7 +142,7 @@ public class OpenSessionDialog  implements SelectionListener, MouseListener{
 		for(ConfigSession session : sessions){
 			TableItem tableItem = new TableItem(table, SWT.NONE);
 			tableItem.setData("session",session);
-			tableItem.setText(new String[] {session.getHost(), session.getPort(), session.getUser(), session.getProtocol().getName()});
+			tableItem.setText(new String[] {session.getTag(), session.getHost(), session.getPort(), session.getUser(), session.getProtocol().getName()});
 		}
 	}
 
