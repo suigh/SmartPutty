@@ -227,7 +227,7 @@ public class MainFrame implements SelectionListener, CTabFolder2Listener, MouseL
 
 		connectionBarMenuItem = new MenuItem(viewMenu, SWT.CHECK);
 		connectionBarMenuItem.setText("Connection bar");
-		connectionBarMenuItem.setSelection(true);
+		connectionBarMenuItem.setSelection(false);
 		connectionBarMenuItem.addSelectionListener(this);
 
 		bottomQuickBarMenuItem = new MenuItem(viewMenu, SWT.CHECK);
@@ -596,7 +596,7 @@ public class MainFrame implements SelectionListener, CTabFolder2Listener, MouseL
 
 		utilitiesBarMenuItem.setSelection(configuration.getUtilitiesBarVisible());
 		utilitiesBarMenuItem.notifyListeners(SWT.Selection, event);
-		connectionBarMenuItem.setSelection(configuration.getConnectionBarVisible());
+		connectionBarMenuItem.setSelection(false);
 		connectionBarMenuItem.notifyListeners(SWT.Selection, event);
 		bottomQuickBarMenuItem.setSelection(configuration.getBottomQuickBarVisible());
 		bottomQuickBarMenuItem.notifyListeners(SWT.Selection, event);

@@ -117,7 +117,7 @@ public class Configuration {
 	 */
 	public Boolean getConnectionBarVisible() {
 		String value = (String) prop.get("ViewConnectionBar");
-		return StringUtils.isEmpty(value) ? true : BooleanUtils.toBoolean(value);
+		return StringUtils.isEmpty(value) ? false : BooleanUtils.toBoolean(value);
 	}
 	
 	/**
