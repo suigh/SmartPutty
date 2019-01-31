@@ -42,7 +42,7 @@ cd to the unzipped build, "SmartPutty" folder and run the following cmd, will la
 
 HomeScreen:
 
-![](https://github.com/ericmore/SmartPutty/blob/dev/doc/image/homescreen.jpg)
+![](https://github.com/suigh/SmartPutty/tree/dev/doc/image/homescreen.jpg)
 
 User Guide (Demo):
 https://github.com/ericmore/SmartPutty/wiki
