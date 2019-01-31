@@ -249,7 +249,7 @@ public class MainFrame implements SelectionListener, CTabFolder2Listener, MouseL
 		configProgramsLocationsItem.addSelectionListener(this);
 
 		// Menu: Application
-		MenuItem application = new MenuItem(menu, SWT.CASCADE);
+		/*MenuItem application = new MenuItem(menu, SWT.CASCADE);
 		application.setText("Application");
 		Menu applicationMenu = new Menu(shell, SWT.DROP_DOWN);
 		application.setMenu(applicationMenu);
@@ -271,7 +271,7 @@ public class MainFrame implements SelectionListener, CTabFolder2Listener, MouseL
 			menuItem.setData("description", description);
 			menuItem.setData("type", "dynamicApplication");
 			menuItem.addSelectionListener(this);
-		}
+		}*/
 
 		// Menu: About
 		MenuItem about = new MenuItem(menu, SWT.CASCADE);
@@ -280,12 +280,8 @@ public class MainFrame implements SelectionListener, CTabFolder2Listener, MouseL
 		about.setMenu(aboutMenu);
 
 		webcomeMenuItem = new MenuItem(aboutMenu, SWT.PUSH);
-		webcomeMenuItem.setText("Welcome Page");
+		webcomeMenuItem.setText("Help");
 		webcomeMenuItem.addSelectionListener(this);
-
-		updateItem = new MenuItem(aboutMenu, SWT.PUSH);
-		updateItem.setText("Update");
-		updateItem.addSelectionListener(this);
 	}
 
 	/**
@@ -443,7 +439,7 @@ public class MainFrame implements SelectionListener, CTabFolder2Listener, MouseL
 		itemOpen.setImage(MImage.openImage);
 		itemOpen.addSelectionListener(this);
 
-		itemRemoteDesk = new ToolItem(utilitiesToolbar, SWT.PUSH);
+		/*itemRemoteDesk = new ToolItem(utilitiesToolbar, SWT.PUSH);
 		itemRemoteDesk.setText("RemoteDesk");
 		itemRemoteDesk.setToolTipText("open system remote desk tool");
 		itemRemoteDesk.setImage(MImage.RemoteDeskImage);
@@ -483,7 +479,7 @@ public class MainFrame implements SelectionListener, CTabFolder2Listener, MouseL
 		itemHelp.setText("Help");
 		itemHelp.setToolTipText("help document");
 		itemHelp.setImage(MImage.helpImage);
-		itemHelp.addSelectionListener(this);
+		itemHelp.addSelectionListener(this);*/
 
 		utilitiesToolbar.pack();
 	}
