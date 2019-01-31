@@ -568,11 +568,14 @@ public class MainFrame implements SelectionListener, CTabFolder2Listener, MouseL
 								Font songFont = new Font(display, "Dialog", 22, SWT.LEFT); 
 								newItem.setFont(songFont);								 
 								newItem.setText(dragItem.getText());  
-									
+								newItem.setData("hwnd", dragItem.getData("hwnd"));
+								newItem.setData("session", dragItem.getData("session"));								
+
 								Control c = dragItem.getControl();  
 								dragItem.setControl(null);  
 								newItem.setControl(c);  
 								dragItem.dispose();  
+
 									
 								folder.setSelection(newItem);  
 									
