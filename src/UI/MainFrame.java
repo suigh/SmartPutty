@@ -19,7 +19,10 @@ import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Cursor;
+import org.eclipse.swt.graphics.Font; 
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
@@ -496,6 +499,118 @@ public class MainFrame implements SelectionListener, CTabFolder2Listener, MouseL
 		folder.addCTabFolder2Listener(this);
 		folder.addMouseListener(this);
 		folder.addSelectionListener(this);
+
+		Listener listener = new Listener() {  
+			boolean drag = false;  
+			boolean exitDrag = false;  
+			CTabItem dragItem;  
+			Cursor cursorSizeAll = new Cursor(null, SWT.CURSOR_SIZEALL);  
+			Cursor cursorIbeam = new Cursor(null, SWT.CURSOR_NO);  
+			Cursor cursorArrow = new Cursor(null, SWT.CURSOR_ARROW);  
+
+			public void handleEvent(Event e) {  
+				Point p = new Point(e.x, e.y);  
+				if (e.type == SWT.DragDetect) {  
+					p = folder.toControl(display.getCursorLocation()); // see eclipse bug 43251  
+				}  
+				switch (e.type) {  
+  
+					case SWT.DragDetect: {  
+						CTabItem item = folder.getItem(p);  
+						if (item == null) {  
+							return;  
+						}  
+							
+						drag = true;  
+						exitDrag = false;  
+						dragItem = item;  
+							
+						folder.getShell().setCursor(cursorIbeam);  
+						break;  
+					}  
+
+					case SWT.MouseEnter:  
+						if (exitDrag) {  
+							exitDrag = false;  
+							drag = e.button != 0;  
+						}  
+						break;  
+
+					case SWT.MouseExit:  
+						if (drag) {  
+							folder.setInsertMark(null, false);  
+							exitDrag = true;  
+							drag = false;  
+								
+	
+							folder.getShell().setCursor(cursorArrow);  
+						}  
+						break;  
+
+					case SWT.MouseUp: {  
+						if (!drag) {  
+							return;  
+						}  
+						folder.setInsertMark(null, false);  
+						CTabItem item = folder.getItem(new Point(p.x, 1));  
+							
+						if (item != null) {  
+							int index = folder.indexOf(item);  
+							int newIndex = folder.indexOf(item);  
+							int oldIndex = folder.indexOf(dragItem);  
+							if (newIndex != oldIndex) {  
+								boolean after = newIndex > oldIndex;  
+								index = after ? index + 1 : index/* - 1*/;  
+								index = Math.max(0, index);  
+									
+								CTabItem newItem = new CTabItem(folder, SWT.NONE, index); 
+								Display display = Display.getDefault(); 
+								Font songFont = new Font(display, "Dialog", 22, SWT.LEFT); 
+								newItem.setFont(songFont);								 
+								newItem.setText(dragItem.getText());  
+									
+								Control c = dragItem.getControl();  
+								dragItem.setControl(null);  
+								newItem.setControl(c);  
+								dragItem.dispose();  
+									
+								folder.setSelection(newItem);  
+									
+							}  
+						}  
+						drag = false;  
+						exitDrag = false;  
+						dragItem = null;  
+							 
+						folder.getShell().setCursor(cursorArrow);  
+						break;  
+					}  
+
+					case SWT.MouseMove: {  
+						if (!drag) {  
+							return;  
+						}  
+						CTabItem item = folder.getItem(new Point(p.x, 2));  
+						if (item == null) {  
+							folder.setInsertMark(null, false);  
+							return;  
+						}  
+						Rectangle rect = item.getBounds();  
+						boolean after = p.x > rect.x + rect.width / 2;  
+						folder.setInsertMark(item, after);  
+							
+						folder.getShell().setCursor(cursorSizeAll);  
+						break;  
+					}  
+				}  
+			}  
+		}; 
+
+        folder.addListener(SWT.DragDetect, listener);  
+        folder.addListener(SWT.MouseUp, listener);  
+        folder.addListener(SWT.MouseMove, listener);  
+        folder.addListener(SWT.MouseExit, listener);  
+        folder.addListener(SWT.MouseEnter, listener);		
 	}
 
 	/**
