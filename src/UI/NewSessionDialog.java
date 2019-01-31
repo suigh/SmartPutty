@@ -27,7 +27,7 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
   private MainFrame mainFrame;
   private Shell dialog;
   private Combo comboHost, comboUser, comboProtocol;
-  private Text hostTag, textPassword, textkey;
+  private Text textTag, textPassword, textkey;
   private Button buttonFile, buttonOk, buttonCancel;
 
   public NewSessionDialog(MainFrame mainFrame, OpenSessionDialog sessionDialog, String type) {
@@ -46,8 +46,8 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
     Label lable = new Label(dialog, SWT.NONE);
     lable.setText("Tag");
     lable.setBounds(0, 0, x / 3, y / 6);
-    hostTag = new Text(dialog, SWT.BORDER);
-    hostTag.setBounds(x / 3, 0, 2 * x / 3, y / 6);
+    textTag = new Text(dialog, SWT.BORDER);
+    textTag.setBounds(x / 3, 0, 2 * x / 3, y / 6);
     
     lable = new Label(dialog, SWT.NONE);
     lable.setText("Host");
@@ -75,12 +75,12 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
     lable.setText("Protocol");
     lable.setBounds(0, 3 * y / 6, x / 3, y / 6);
     comboProtocol = new Combo(dialog, SWT.READ_ONLY);
-//    comboProtocol.setItems(new String[] { "ssh" });
-	// Get all protocols and add:
-	for (Protocol protocol : Protocol.values()){
-		comboProtocol.add(protocol.getName());
-	}
-	comboProtocol.select(0);
+    //comboProtocol.setItems(new String[] { "ssh" });
+    // Get all protocols and add:
+    for (Protocol protocol : Protocol.values()){
+      comboProtocol.add(protocol.getName());
+    }
+    comboProtocol.select(0);
     comboProtocol.setBounds(x / 3, 3 * y / 6, 2 * x / 3, y / 6);
     comboProtocol.setText(ConstantValue.DEFAULT_PROTOCOL);
     comboProtocol.addSelectionListener(this);
@@ -114,6 +114,7 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
     if (type.equals("edit")) {
       ConfigSession session = sessionDialog.getCurrentSelectSession();
       if (session != null) {
+        textTag.setText(session.getTag());        
         comboHost.setText(session.getHost());
         comboUser.setText(session.getUser());
         comboProtocol.setText(session.getProtocol().getName());
@@ -188,7 +189,7 @@ public class NewSessionDialog implements SelectionListener, MouseListener {
   public void mouseDown(org.eclipse.swt.events.MouseEvent e) {
     // TODO Auto-generated method stub
     if (e.getSource() == buttonOk) {
-      String tag = hostTag.getText();
+      String tag = textTag.getText();
       String host = comboHost.getText();
       String user = comboUser.getText();
       String password = textPassword.getText();
