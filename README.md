@@ -2,8 +2,10 @@
 <p>
   
 what is changed begin:
+
 Do some enhancements based on the previous ones, focus on ssh support.
 User can use tag instead of hostname to manage the tabs, and tabs can be dragged.
+
 what is changed end:
 
 SSH,SCP,SFTP,VNC remote to Linux Machine from Windows.
