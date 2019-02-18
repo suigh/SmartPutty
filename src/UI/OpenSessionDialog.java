@@ -43,10 +43,10 @@ public class OpenSessionDialog  implements SelectionListener, MouseListener{
 	private void init(){
 		dialog.setImage(MImage.openImage);
 		dialog.setText("Open Session Dialog");
-		dialog.setSize(450,300);
+		dialog.setSize(450,600);
 		
 		table = new Table(dialog, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
-		table.setBounds(0, 0, 496, 257);
+		table.setBounds(0, 0, 496, 557);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		table.addMouseListener(this);
